@@ -5,6 +5,7 @@ type: insight
 author: cat
 date: 2026-10-20
 tags: [workflow, games, github]
+draft: true
 ---
 
 [Sample post: Cat, check and rewrite in your own words.]

@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { entry: CollectionEntry<'apps'> | CollectionEntry<'games'>; action: string }
+const { entry, action } = Astro.props;
+const { title, url, featured, description } = entry.data;
+---
+<li class="project-row">
+  {featured && <span class="badge"><span class="badge-dot"></span>FEATURED</span>}
+  <span class="project-name">
+    {title}
+    {description && <span class="project-desc">{description}</span>}
+  </span>
+  {url && (
+    <a class="project-action" href={url}>{action}<span class="sr-only">: {title}</span> <span aria-hidden="true">→</span></a>
+  )}
+</li>

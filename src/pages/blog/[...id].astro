@@ -16,8 +16,9 @@ const { Content } = await render(post);
 const date = post.data.date.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <Base title={post.data.title} description={post.data.description}>
+  <div class="wrap page">
   <article class="prose">
-    <TypePill type={post.data.type} link />
+    <TypePill type={post.data.type} />
     <h1>{post.data.title}</h1>
     <div class="post-meta">
       {author && <Avatar person={author} />}
@@ -26,7 +27,7 @@ const date = post.data.date.toLocaleDateString('en-AU', { day: 'numeric', month:
         {date}
       </span>
     </div>
-    {post.data.draft && <p class="sample-note">Draft: only visible on the local preview.</p>}
+    {post.data.draft && <p class="note">Draft: only visible on the local preview.</p>}
     <Content />
     {post.data.tags.length > 0 && (
       <div class="tags" style="margin-top:40px">{post.data.tags.map((t) => <span class="tag">#{t}</span>)}</div>
@@ -47,4 +48,5 @@ const date = post.data.date.toLocaleDateString('en-AU', { day: 'numeric', month:
       pre.append(button);
     });
   </script>
+  </div>
 </Base>

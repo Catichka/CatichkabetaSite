@@ -1,10 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { art } from '../site';
 
 interface Props { person: CollectionEntry<'people'>; large?: boolean }
 const { person, large = false } = Astro.props;
-const src = person.data.avatar ?? art.avatar;
+const src = person.data.avatar;
 const colours = ['var(--lavender)', 'var(--mint)', 'var(--peach)', 'var(--blue)', 'var(--pink)'];
 const colour = colours[[...person.id].reduce((n, c) => n + c.charCodeAt(0), 0) % colours.length];
 ---

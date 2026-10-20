@@ -15,6 +15,7 @@ const { Content } = await render(person);
 const posts = (await getPosts()).filter((p) => p.data.author.id === person.id);
 ---
 <Base title={person.data.name} description={person.data.tagline}>
+  <div class="wrap page">
   <div class="person-head">
     <Avatar person={person} large />
     <div>
@@ -30,4 +31,5 @@ const posts = (await getPosts()).filter((p) => p.data.author.id === person.id);
       <div class="grid">{posts.map((post) => <PostCard post={post} />)}</div>
     </>
   )}
+  </div>
 </Base>

@@ -27,18 +27,16 @@ const people = defineCollection({
   }),
 });
 
-// The apps and games CatichkaBeta makes.
-const projects = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    status: z.enum(['idea', 'in progress', 'playable', 'released']),
-    image: z.string().optional(),
-    featured: z.boolean().default(false),
-    order: z.number().default(100),
-    links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
-  }),
+// The apps and games lists on the home page: one Markdown file per entry.
+// Add a file to grow a list; the category art stays the same.
+const entry = z.object({
+  title: z.string(),
+  url: z.string().url().optional(),
+  featured: z.boolean().default(false),
+  description: z.string().optional(),
+  order: z.number().default(100),
 });
+const apps = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/apps' }), schema: entry });
+const games = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/games' }), schema: entry });
 
-export const collections = { posts, people, projects };
+export const collections = { posts, people, apps, games };

@@ -1,14 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../site';
+const email = site.connect.replace('mailto:', '');
 ---
 <Base title="Privacy" description="CatichkaBeta privacy policy.">
+  <div class="wrap page">
   <div class="prose">
     <h1>Privacy</h1>
-    <p class="sample-note">Placeholder: review this before launch, and extend it for each app or game, since app stores ask for a privacy policy covering what each one collects.</p>
+    <p class="note">Placeholder: review this before launch, and extend it for each app or game, since app stores ask for a privacy policy covering what each one collects.</p>
     <p>This website does not use accounts, cookies or tracking, and does not collect personal information from visitors.</p>
-    <p>The site is hosted on GitHub Pages, which may log visitors' IP addresses for security. Fonts are loaded from Google Fonts. See the GitHub and Google privacy policies for how they handle that data.</p>
+    <p>The site is hosted on GitHub Pages, which may log visitors' IP addresses for security. The font is loaded from Google Fonts. See the GitHub and Google privacy policies for how they handle that data.</p>
     <p>If you email us, we use your email only to reply to you.</p>
-    <p>Questions: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    <p>Questions: <a href={site.connect}>{email}</a>.</p>
+  </div>
   </div>
 </Base>

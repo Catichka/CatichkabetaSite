@@ -5,9 +5,10 @@ import Avatar from '../../components/Avatar.astro';
 
 const people = (await getCollection('people')).sort((a, b) => Number(b.data.founder) - Number(a.data.founder) || a.data.name.localeCompare(b.data.name));
 ---
-<Base title="People" description="The people sharing what they're doing with AI.">
-  <h1>People</h1>
-  <p class="lede">The people sharing here: the CatichkaBeta founders and friends doing interesting things with AI.</p>
+<Base title="The humans" description="The people behind CatichkaBeta.">
+  <div class="wrap page">
+  <h1>The humans</h1>
+  <p class="lede">The people behind CatichkaBeta.</p>
   <div class="grid" style="margin-top:32px">
     {people.map((person) => (
       <a class="card person" href={`/people/${person.id}/`}>
@@ -18,5 +19,6 @@ const people = (await getCollection('people')).sort((a, b) => Number(b.data.foun
         </div>
       </a>
     ))}
+  </div>
   </div>
 </Base>

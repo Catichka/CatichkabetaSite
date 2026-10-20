@@ -5,6 +5,7 @@ type: code
 author: cat
 date: 2026-10-20
 tags: [prompting, art]
+draft: true
 ---
 
 [Sample post showing how code blocks look.]

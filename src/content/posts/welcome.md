@@ -5,6 +5,7 @@ type: insight
 author: cat
 date: 2026-10-20
 tags: [meta]
+draft: true
 ---
 
 [Sample post. Cat: replace this with the real welcome post, or delete it.]
