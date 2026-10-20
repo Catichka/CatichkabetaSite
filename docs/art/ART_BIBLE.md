@@ -3,11 +3,11 @@
 ChatGPT owns art direction and asset production. Claude owns the site's structure, code and putting the art in. Cat reviews and approves.
 
 ## Creative direction
-Black and pastel. Playful, modern flat illustration with clean shapes and a soft grain texture. Friendly and a little nerdy. The site is about friends using AI in interesting ways, and a small studio making apps and games.
+Black and pastel, with a gaming, soft-cyberpunk feel: pastel neon glows on black, faint grids, wireframe shapes. Playful rather than gritty: friendly and a little nerdy. The home page has a live 3D wireframe knot in a cloud of pastel particles, so art should sit comfortably next to it. The site is about friends using AI in interesting ways, and a small studio making apps and games.
 
 **Style line to start every prompt with:**
 
-> Style: playful modern flat illustration, clean shapes, soft grain texture, black background with soft pastel accents (lavender, mint, peach, baby blue), friendly and a little nerdy, no text unless asked.
+> Style: playful soft-cyberpunk illustration, clean shapes, pastel neon glow (lavender, mint, peach, baby blue, pink) on a near-black background, subtle grid and wireframe details, friendly and a little nerdy, not gritty, no text unless asked.
 
 ## Palette (from `src/styles/global.css`)
 | Name | Hex | Used for |

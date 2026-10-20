@@ -23,7 +23,12 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 80% 50% at 80% -10%, rgb(201 184 255 / 0.14), transparent 60%),
+    radial-gradient(ellipse 60% 40% at -10% 30%, rgb(166 240 210 / 0.07), transparent 60%),
+    linear-gradient(rgb(201 184 255 / 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, rgb(201 184 255 / 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--bg);
   color: var(--text);
   font: 17px/1.65 var(--font);
 }
@@ -55,29 +60,41 @@ main { padding: 48px 0 96px; }
 .site-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .site-footer a { color: var(--muted); }
 
-/* Hero */
-.hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; padding: 24px 0 56px; }
-.hero-art { aspect-ratio: 16 / 10; border-radius: 24px; overflow: hidden; position: relative; background: var(--surface); border: 1px solid var(--border); }
-.hero-art img { width: 100%; height: 100%; object-fit: cover; }
-.blobs span { position: absolute; border-radius: 50%; filter: blur(2px); opacity: 0.9; }
-.blobs span:nth-child(1) { width: 46%; aspect-ratio: 1; background: var(--lavender); top: 10%; left: 8%; }
-.blobs span:nth-child(2) { width: 34%; aspect-ratio: 1; background: var(--mint); bottom: 8%; right: 12%; }
-.blobs span:nth-child(3) { width: 22%; aspect-ratio: 1; background: var(--peach); top: 14%; right: 18%; }
-.blobs span:nth-child(4) { width: 14%; aspect-ratio: 1; background: var(--blue); bottom: 18%; left: 36%; }
-.blobs em { position: absolute; inset: auto 16px 12px auto; font-style: normal; font-size: 0.75rem; color: var(--bg); background: rgb(243 240 250 / 0.85); padding: 2px 8px; border-radius: 999px; }
-@media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
+/* Hero: 3D scene on the right, copy on the left; on phones the scene sits behind the copy */
+.hero { position: relative; min-height: 560px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; margin: -48px 0 24px; padding: 48px 0; }
+.hero-copy { position: relative; z-index: 1; }
+.hero-3d { position: absolute; inset: 0 -20px 0 38%; opacity: 0; transition: opacity 1.2s ease; }
+.hero-3d.ready { opacity: 1; }
+.hero-3d.no-webgl { opacity: 1; background: radial-gradient(circle at 60% 50%, rgb(201 184 255 / 0.35), transparent 55%), radial-gradient(circle at 75% 70%, rgb(166 240 210 / 0.3), transparent 45%); }
+.hero-3d canvas { width: 100%; height: 100%; display: block; }
+.hero-figure { position: relative; z-index: 1; grid-column: 2; justify-self: center; max-height: 460px; width: auto; filter: drop-shadow(0 0 40px rgb(201 184 255 / 0.35)); }
+.kicker { font: 0.9rem var(--mono); color: var(--mint); letter-spacing: 0.08em; margin: 0 0 12px; text-shadow: 0 0 12px rgb(166 240 210 / 0.6); }
+.neon { background: linear-gradient(90deg, var(--lavender), var(--pink) 45%, var(--peach) 70%, var(--mint)); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 18px rgb(201 184 255 / 0.45)); }
+@media (max-width: 800px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 270px; }
+  .hero-3d { inset: 0 -20px auto -20px; height: 280px; }
+  .hero-figure { grid-column: 1; grid-row: 1; max-height: 240px; margin-top: -250px; }
+}
+
+/* Scroll reveal: only hides things when JavaScript is on to show them again */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  * { scroll-behavior: auto; }
+}
 
 /* Buttons */
-.btn { display: inline-block; padding: 10px 20px; border-radius: 999px; background: var(--lavender); color: var(--bg); text-decoration: none; font-weight: 600; }
+.btn { box-shadow: 0 0 24px rgb(201 184 255 / 0.35); display: inline-block; padding: 10px 20px; border-radius: 999px; background: var(--lavender); color: var(--bg); text-decoration: none; font-weight: 600; }
 .btn:hover { background: var(--mint); color: var(--bg); }
-.btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn.ghost { box-shadow: none; background: transparent; color: var(--text); border: 1px solid var(--border); }
 .btn.ghost:hover { border-color: var(--mint); color: var(--mint); }
 .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
 
 /* Cards */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--text); transition: border-color 0.15s, transform 0.15s; }
-a.card:hover { border-color: var(--lavender); transform: translateY(-2px); color: var(--text); }
+.card { background: rgb(21 21 29 / 0.8); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--text); transition: border-color 0.15s, transform 0.15s; }
+a.card:hover { border-color: var(--lavender); transform: translateY(-3px); color: var(--text); box-shadow: 0 0 0 1px var(--lavender), 0 0 32px rgb(201 184 255 / 0.25); }
 .card h3 { margin: 0; font-size: 1.2rem; }
 .card p { margin: 0; color: var(--muted); font-size: 0.97rem; }
 .card .meta { margin-top: auto; font-size: 0.85rem; color: var(--muted); }
@@ -117,6 +134,6 @@ a.card:hover { border-color: var(--lavender); transform: translateY(-2px); color
 .copy-btn:hover { opacity: 1; border-color: var(--mint); }
 .post-meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; color: var(--muted); font-size: 0.95rem; margin-bottom: 32px; }
 
-.callout { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-top: 56px; }
+.callout { background: linear-gradient(135deg, rgb(201 184 255 / 0.12), rgb(166 240 210 / 0.08)); box-shadow: inset 0 0 0 1px rgb(201 184 255 / 0.15); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-top: 56px; }
 .callout h2 { margin-top: 0; }
 .sample-note { background: rgb(255 201 168 / 0.12); border: 1px dashed var(--peach); color: var(--peach); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; margin-bottom: 24px; }

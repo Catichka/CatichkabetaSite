@@ -14,7 +14,7 @@ Claude then copies approved files to `public/art/`, sets the slot in `src/site.t
 | 1 | `logo` | Logo mark: a cat silhouette combined with β | Square, transparent PNG | First |
 | 2 | `wordmark` | "CatichkaBeta" next to the logo mark, light version for the black header | Wide, transparent PNG | First |
 | 3 | favicon | Logo mark in pastel on a black rounded square, bold enough for 16px | 1024×1024 PNG | First |
-| 4 | `hero` | Friends at laptops with a friendly cat, sharing ideas: code brackets, lightbulbs, little game controllers. Calm space on the left | About 1600×1000 (16:10) | First |
+| 4 | `hero` | A character piece that floats in front of the 3D scene on the home page: a friendly cat with a laptop or game controller, pastel neon rim light | Transparent PNG, about 1000px tall | Next (the 3D scene works without it) |
 | 5 | `icons.insight`, `icons.idea`, `icons.code` | Matching icon set: notebook with sparkle, lightbulb, `</>` brackets | Square, transparent PNG each | Next |
 | 6 | `shareImage` | Link preview card: wordmark centred, floating pastel icons | 1200×630 PNG | Next |
 | 7 | `avatar` | Placeholder avatar: a cat face in a circle | Square, transparent PNG | Later |

@@ -2,7 +2,8 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
-import { site, art } from '../site';
+import Hero3D from '../components/Hero3D.astro';
+import { art } from '../site';
 import { getPosts } from '../lib';
 
 const posts = (await getPosts()).slice(0, 6);
@@ -11,36 +12,34 @@ const featured = projects.find((p) => p.data.featured) ?? projects[0];
 ---
 <Base>
   <section class="hero">
-    <div>
-      <h1>{site.tagline}</h1>
+    <Hero3D />
+    <div class="hero-copy">
+      <p class="kicker">// apps · games · ai</p>
+      <h1><span class="neon">Friends using AI</span> in interesting ways, sharing what works.</h1>
       <p class="lede">CatichkaBeta is a small studio building apps and games, and a shared notebook for the people we know who are doing interesting things with AI.</p>
       <div class="actions">
         <a class="btn" href="/posts/">Read the latest</a>
         <a class="btn ghost" href="/contribute/">Share something</a>
       </div>
     </div>
-    <div class="hero-art">
-      {art.hero ? <img src={art.hero} alt="" /> : (
-        <div class="blobs" aria-hidden="true"><span></span><span></span><span></span><span></span><em>hero art coming</em></div>
-      )}
-    </div>
+    {art.hero && <img class="hero-figure" src={art.hero} alt="" />}
   </section>
 
-  <div class="section-head">
+  <div class="section-head reveal">
     <h2>Latest</h2>
     <a href="/posts/">Everything →</a>
   </div>
-  <div class="grid">
+  <div class="grid reveal">
     {posts.map((post) => <PostCard post={post} />)}
   </div>
 
   {featured && (
     <>
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2>What we're making</h2>
         <a href="/projects/">All projects →</a>
       </div>
-      <a class="card" href="/projects/">
+      <a class="card reveal" href="/projects/">
         <span class="pill status">{featured.data.status}</span>
         <h3>{featured.data.title}</h3>
         <p>{featured.data.summary}</p>
@@ -48,7 +47,7 @@ const featured = projects.find((p) => p.data.featured) ?? projects[0];
     </>
   )}
 
-  <section class="callout">
+  <section class="callout reveal">
     <h2>Using AI in an interesting way?</h2>
     <p class="muted">Send us the trick, the prompt, the snippet or the story. Short is fine.</p>
     <a class="btn" href="/contribute/">How to share</a>

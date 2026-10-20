@@ -24,6 +24,7 @@ const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : u
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -69,5 +70,17 @@ const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : u
         </span>
       </div>
     </footer>
+    <script>
+      // Fade sections in as they scroll into view.
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

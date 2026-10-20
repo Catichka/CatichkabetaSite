@@ -1,0 +1,110 @@
+---
+// Interactive 3D scene behind the home page hero: a neon wireframe knot inside a
+// cloud of pastel particles that leans toward the pointer.
+---
+<div class="hero-3d" aria-hidden="true">
+  <canvas></canvas>
+</div>
+
+<script>
+  import {
+    AdditiveBlending, BufferAttribute, BufferGeometry, Color, Group, IcosahedronGeometry,
+    LineBasicMaterial, LineSegments, PerspectiveCamera, Points, PointsMaterial, Scene,
+    TorusKnotGeometry, WebGLRenderer, WireframeGeometry,
+  } from 'three';
+
+  const holder = document.querySelector<HTMLDivElement>('.hero-3d');
+  const canvas = holder?.querySelector('canvas');
+  if (holder && canvas) start(holder, canvas);
+
+  function start(holder: HTMLDivElement, canvas: HTMLCanvasElement) {
+    let renderer: WebGLRenderer;
+    try {
+      renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
+    } catch {
+      holder.classList.add('no-webgl');
+      return;
+    }
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.z = 9;
+
+    const pastels = ['#c9b8ff', '#a6f0d2', '#ffc9a8', '#a8d6ff', '#ffb8d8'].map((c) => new Color(c));
+    const group = new Group();
+    scene.add(group);
+
+    const knot = new LineSegments(
+      new WireframeGeometry(new TorusKnotGeometry(1.7, 0.45, 120, 12, 2, 3)),
+      new LineBasicMaterial({ color: pastels[0], transparent: true, opacity: 0.55, blending: AdditiveBlending }),
+    );
+    group.add(knot);
+
+    const shell = new LineSegments(
+      new WireframeGeometry(new IcosahedronGeometry(3.3, 1)),
+      new LineBasicMaterial({ color: pastels[1], transparent: true, opacity: 0.18, blending: AdditiveBlending }),
+    );
+    group.add(shell);
+
+    const count = 1400;
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = 3.6 + Math.random() * 4;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      positions.set([r * Math.sin(phi) * Math.cos(theta), r * Math.sin(phi) * Math.sin(theta), r * Math.cos(phi)], i * 3);
+      const c = pastels[i % pastels.length];
+      colors.set([c.r, c.g, c.b], i * 3);
+    }
+    const dust = new BufferGeometry();
+    dust.setAttribute('position', new BufferAttribute(positions, 3));
+    dust.setAttribute('color', new BufferAttribute(colors, 3));
+    const particles = new Points(dust, new PointsMaterial({ size: 0.05, vertexColors: true, transparent: true, opacity: 0.9, blending: AdditiveBlending }));
+    scene.add(particles);
+
+    const pointer = { x: 0, y: 0 };
+    addEventListener('pointermove', (e) => {
+      pointer.x = (e.clientX / innerWidth) * 2 - 1;
+      pointer.y = (e.clientY / innerHeight) * 2 - 1;
+    }, { passive: true });
+
+    function resize() {
+      const { clientWidth: w, clientHeight: h } = holder;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      // Pull the camera back on narrow screens so the knot still fits.
+      camera.position.z = w < 700 ? 12 : 9;
+      camera.updateProjectionMatrix();
+    }
+    new ResizeObserver(resize).observe(holder);
+    resize();
+
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let visible = true;
+    new IntersectionObserver(([entry]) => (visible = entry.isIntersecting)).observe(holder);
+
+    let t = 0;
+    function frame() {
+      requestAnimationFrame(frame);
+      if (!visible) return;
+      t += 0.004;
+      knot.rotation.x = t * 1.3;
+      knot.rotation.y = t * 1.7;
+      shell.rotation.y = -t * 0.6;
+      particles.rotation.y = t * 0.25;
+      group.rotation.y += (pointer.x * 0.5 - group.rotation.y) * 0.04;
+      group.rotation.x += (pointer.y * 0.35 - group.rotation.x) * 0.04;
+      renderer.render(scene, camera);
+    }
+    if (still) {
+      knot.rotation.set(0.6, 0.9, 0);
+      renderer.render(scene, camera);
+      new ResizeObserver(() => renderer.render(scene, camera)).observe(holder);
+    } else {
+      frame();
+    }
+    holder.classList.add('ready');
+  }
+</script>

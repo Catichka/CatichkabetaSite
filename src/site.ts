@@ -10,7 +10,7 @@ export const site = {
 export const art = {
   logo: null as string | null, // square transparent PNG, e.g. '/art/logo.png'
   wordmark: null as string | null, // wide transparent PNG
-  hero: null as string | null, // about 1600x900
+  hero: null as string | null, // transparent character PNG that floats over the 3D scene
   icons: {
     insight: null as string | null,
     idea: null as string | null,
