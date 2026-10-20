@@ -11,7 +11,5 @@ const { title, url, featured, description } = entry.data;
     {title}
     {description && <span class="project-desc">{description}</span>}
   </span>
-  {url && (
-    <a class="project-action" href={url}>{action}<span class="sr-only">: {title}</span> <span aria-hidden="true">→</span></a>
-  )}
+  <a class="project-action" href={url} aria-disabled={url ? undefined : 'true'}>{action}<span class="sr-only">: {title}</span> <span aria-hidden="true">→</span></a>
 </li>

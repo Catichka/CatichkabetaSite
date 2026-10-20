@@ -2,15 +2,19 @@
 export const site = {
   name: 'CatichkaBeta',
   description: 'imagination meets tools. Apps, games and notes from the rabbit hole.',
-  // Where "connect" goes. Not agreed yet: confirm the address before launch.
-  connect: 'mailto:hello@catichkabeta.com',
+};
+
+// Links with no destination yet render as dead (visible, not clickable). Set an href to bring one to life.
+export const links = {
+  connect: null as string | null, // its own connect page, not designed yet
+  humans: null as string | null, // its own "Meet the humans" page, not designed yet
 };
 
 export const nav = [
   { href: '/#apps', label: 'apps' },
   { href: '/#games', label: 'games' },
   { href: '/blog/', label: 'blog' },
-  { href: site.connect, label: 'connect' },
+  { href: links.connect, label: 'connect' },
 ];
 
 export const art = {

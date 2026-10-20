@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Divider from '../components/Divider.astro';
 import ProjectRow from '../components/ProjectRow.astro';
-import { art } from '../site';
+import { art, links } from '../site';
 
 const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) => a.data.order - b.data.order;
 const apps = (await getCollection('apps')).sort(byOrder);
@@ -16,7 +16,7 @@ const games = (await getCollection('games')).sort(byOrder);
       <h1><span class="lav">imagination</span> <span class="mint">meets tools</span></h1>
       <div class="actions">
         <a class="btn" href="#apps">Explore the playground <span aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="/people/">Meet the humans
+        <a class="btn ghost" href={links.humans ?? undefined} aria-disabled={links.humans ? undefined : 'true'}>Meet the humans
           <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c.6-4 3.2-6 6.5-6s5.9 2 6.5 6" /><circle cx="17" cy="9" r="2.6" /><path d="M16.5 14.2c2.8 0 4.6 1.8 5 5" /></svg>
         </a>
       </div>
