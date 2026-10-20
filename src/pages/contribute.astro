@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+---
+<Base title="Share something" description="How to share an insight, idea or piece of code on CatichkaBeta.">
+  <div class="prose">
+    <h1>Share something</h1>
+    <p class="lede">Doing something interesting with AI? We'd love to put it here, with your name on it.</p>
+    <h2>What fits</h2>
+    <ul>
+      <li><strong>An insight:</strong> something you learned, a workflow that works, a before and after.</li>
+      <li><strong>An idea:</strong> a prompt, an experiment, something you want to try.</li>
+      <li><strong>Code:</strong> a snippet, a tool or a repo, with a line on what it does.</li>
+    </ul>
+    <h2>The easy way</h2>
+    <p>Email <a href={`mailto:${site.email}`}>{site.email}</a> with a title, your text (any length), and your name as you'd like it shown. Add screenshots or code if you have them. We'll put it together and check with you before it goes up.</p>
+    <h2>The GitHub way</h2>
+    <p>If you're comfortable with GitHub, add a Markdown file to <code>src/content/posts/</code> and open a pull request. Start from this template:</p>
+    <pre><code>---
+title: Your title
+description: One sentence on what this is about.
+type: insight   # insight, idea or code
+author: your-name   # matches a file in src/content/people/
+date: 2026-10-20
+tags: [prompting, tools]
+---
+
+Your post, in Markdown.</code></pre>
+  </div>
+</Base>

@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(projects.map(async (p) => ({ project: p, Content: (await render(p)).Content })));
+---
+<Base title="Projects" description="The apps and games CatichkaBeta is making.">
+  <h1>Projects</h1>
+  <p class="lede">The apps and games we're building, mostly with a lot of help from AI.</p>
+  <div class="grid" style="margin-top:32px">
+    {rendered.map(({ project, Content }) => (
+      <article class="card" id={project.id}>
+        {project.data.image && <img src={project.data.image} alt="" style="border-radius:10px" />}
+        <span class="pill status">{project.data.status}</span>
+        <h3>{project.data.title}</h3>
+        <p>{project.data.summary}</p>
+        <div class="prose muted" style="font-size:0.95rem"><Content /></div>
+        <div class="links">{project.data.links.map((l) => <a href={l.url}>{l.label} →</a>)}</div>
+      </article>
+    ))}
+  </div>
+</Base>

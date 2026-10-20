@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import Filters from '../../components/Filters.astro';
+import { getPosts } from '../../lib';
+
+const posts = await getPosts();
+---
+<Base title="All posts" description="Insights, ideas and code from friends using AI.">
+  <h1>All posts</h1>
+  <p class="lede">Insights, ideas and code from the people here, newest first.</p>
+  <Filters />
+  <div class="grid">{posts.map((post) => <PostCard post={post} />)}</div>
+</Base>

@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Avatar from '../../components/Avatar.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts } from '../../lib';
+
+export async function getStaticPaths() {
+  const people = await getCollection('people');
+  return people.map((person) => ({ params: { id: person.id }, props: { person } }));
+}
+
+const { person } = Astro.props;
+const { Content } = await render(person);
+const posts = (await getPosts()).filter((p) => p.data.author.id === person.id);
+---
+<Base title={person.data.name} description={person.data.tagline}>
+  <div class="person-head">
+    <Avatar person={person} large />
+    <div>
+      <h1 style="margin:0">{person.data.name}</h1>
+      <p class="muted" style="margin:4px 0 8px">{person.data.tagline}{person.data.founder && ' · Co-founder'}</p>
+      <div class="links">{person.data.links.map((l) => <a href={l.url}>{l.label}</a>)}</div>
+    </div>
+  </div>
+  <div class="prose"><Content /></div>
+  {posts.length > 0 && (
+    <>
+      <h2>Posts</h2>
+      <div class="grid">{posts.map((post) => <PostCard post={post} />)}</div>
+    </>
+  )}
+</Base>

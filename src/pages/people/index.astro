@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Avatar from '../../components/Avatar.astro';
+
+const people = (await getCollection('people')).sort((a, b) => Number(b.data.founder) - Number(a.data.founder) || a.data.name.localeCompare(b.data.name));
+---
+<Base title="People" description="The people sharing what they're doing with AI.">
+  <h1>People</h1>
+  <p class="lede">The people sharing here: the CatichkaBeta founders and friends doing interesting things with AI.</p>
+  <div class="grid" style="margin-top:32px">
+    {people.map((person) => (
+      <a class="card person" href={`/people/${person.id}/`}>
+        <Avatar person={person} />
+        <div>
+          <h3>{person.data.name}</h3>
+          <p>{person.data.tagline}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+</Base>

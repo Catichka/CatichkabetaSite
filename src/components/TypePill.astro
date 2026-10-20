@@ -1,0 +1,13 @@
+---
+import { art, postTypes, type PostType } from '../site';
+
+interface Props { type: PostType; link?: boolean }
+const { type, link = false } = Astro.props;
+const info = postTypes[type];
+const icon = art.icons[type];
+const Tag = link ? 'a' : 'span';
+---
+<Tag class={`pill ${type}`} href={link ? info.path : undefined}>
+  {icon ? <img src={icon} alt="" /> : <span aria-hidden="true">{info.emoji}</span>}
+  {info.single}
+</Tag>
