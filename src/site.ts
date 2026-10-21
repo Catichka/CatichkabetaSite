@@ -30,9 +30,9 @@ export const nav = [
 export const art = {
   druid: '/art/druid-small.png',
   heroTree: '/art/hero-tree.png',
+  connect: '/art/connect.png',
   apps: '/art/apps.png',
   games: '/art/games.png',
   blog: '/art/blog.png',
-  connect: '/art/connect.png',
   shareImage: null as string | null, // 1200x630 PNG link preview, still to come from ChatGPT
 };
