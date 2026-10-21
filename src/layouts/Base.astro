@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import Brand from '../components/Brand.astro';
+import Divider from '../components/Divider.astro';
+import { site, nav, art } from '../site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : site.name;
+const path = Astro.url.pathname;
+const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : undefined;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon-180.png" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {shareImage && <meta property="og:image" content={shareImage} />}
+    {shareImage && <meta name="twitter:card" content="summary_large_image" />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-bar wrap">
+      <Brand />
+      <nav class="nav" aria-label="Main">
+        {nav.map((item) => (
+          <a href={item.href ?? undefined} aria-disabled={item.href ? undefined : 'true'}>{item.label}</a>
+        ))}
+      </nav>
+    </header>
+    <div class="wrap"><Divider /></div>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="wrap">
+      <Divider />
+      <div class="site-bar">
+        <Brand />
+        <nav class="nav" aria-label="Footer">
+          {nav.map((item) => <a href={item.href ?? undefined} aria-disabled={item.href ? undefined : 'true'}>{item.label}</a>)}
+        </nav>
+      </div>
+    </footer>
+    <script>
+      // Fade sections in as they scroll into view (skipped when reduced motion is on, see CSS).
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

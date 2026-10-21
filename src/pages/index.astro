@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Divider from '../components/Divider.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import { art, links } from '../site';
+
+const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) => a.data.order - b.data.order;
+const apps = (await getCollection('apps')).sort(byOrder);
+const games = (await getCollection('games')).sort(byOrder);
+---
+<Base>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <span class="dash" aria-hidden="true"></span>
+      <h1><span class="lav">imagination</span> <span class="mint">meets tools</span></h1>
+      <div class="actions">
+        <a class="btn" href="#apps">Explore the playground <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href={links.humans ?? undefined} aria-disabled={links.humans ? undefined : 'true'}>Meet the humans
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c.6-4 3.2-6 6.5-6s5.9 2 6.5 6" /><circle cx="17" cy="9" r="2.6" /><path d="M16.5 14.2c2.8 0 4.6 1.8 5 5" /></svg>
+        </a>
+      </div>
+    </div>
+    <img class="hero-art" src={art.heroTree} alt="" width="870" height="612" />
+  </section>
+
+  <div class="wrap"><Divider /></div>
+
+  <section class="feature wrap reveal" id="apps" aria-labelledby="apps-title">
+    <img class="feature-art" src={art.apps} alt="" width="448" height="247" loading="lazy" />
+    <div class="feature-copy">
+      <h2 id="apps-title">Apps</h2>
+      <p class="sub">Tools for everyday life.</p>
+      <ul class="project-list">{apps.map((entry) => <ProjectRow entry={entry} action="Explore app" />)}</ul>
+    </div>
+  </section>
+
+  <div class="wrap"><Divider /></div>
+
+  <section class="feature flip wrap reveal" id="games" aria-labelledby="games-title">
+    <img class="feature-art" src={art.games} alt="" width="418" height="265" loading="lazy" />
+    <div class="feature-copy">
+      <h2 id="games-title">Games</h2>
+      <p class="sub">Little worlds to play in.</p>
+      <ul class="project-list">{games.map((entry) => <ProjectRow entry={entry} action="Play game" />)}</ul>
+    </div>
+  </section>
+
+  <div class="wrap"><Divider /></div>
+
+  <section class="feature wrap reveal" id="blog" aria-labelledby="blog-title">
+    <img class="feature-art" src={art.blog} alt="" width="379" height="250" loading="lazy" />
+    <div class="feature-copy">
+      <h2 id="blog-title">Blog</h2>
+      <p class="sub">Ideas, discoveries and notes from the rabbit hole.</p>
+      <div class="actions"><a class="btn ghost" href={links.blog}>Explore the blog <span aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+</Base>
