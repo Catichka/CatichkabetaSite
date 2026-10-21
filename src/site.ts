@@ -8,7 +8,7 @@ export const site = {
 export const links = {
   blog: 'https://substack.com/@ca7ichka', // Cat's Substack
   connect: '/connect/' as string | null,
-  humans: null as string | null, // its own "Meet the humans" page, not designed yet
+  humans: '/humans/' as string | null,
 };
 
 export const contact = {

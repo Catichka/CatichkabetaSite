@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { links } from '../site';
+
+const humans = (await getCollection('humans')).sort((a, b) => a.data.order - b.data.order);
+const profiles = await Promise.all(humans.map(async (h) => ({ ...h, Bio: (await render(h)).Content })));
+---
+<Base title="Meet the humans" description="The humans behind CatichkaBeta.">
+  <section class="humans wrap">
+    <h1 class="lav">meet the humans</h1>
+    {profiles.map(({ data, Bio }) => (
+      <article class="human">
+        <img class="human-avatar" src={data.avatar} alt={data.avatarAlt} width="468" height="468" />
+        <div>
+          <h2>{data.name}</h2>
+          {data.alias && <p class="human-alias">{data.alias}</p>}
+          <div class="human-bio"><Bio /></div>
+          {links.connect && <a class="human-action" href={links.connect}>Let’s connect <span aria-hidden="true">↗</span></a>}
+        </div>
+      </article>
+    ))}
+  </section>
+</Base>

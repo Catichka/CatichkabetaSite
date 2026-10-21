@@ -14,4 +14,18 @@ const entry = z.object({
 const apps = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/apps' }), schema: entry });
 const games = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/games' }), schema: entry });
 
-export const collections = { apps, games };
+
+// The people on the "meet the humans" page: one Markdown file per person, bio in the body.
+// Add a file (and its avatar in public/art/) to add a human; see docs/art/humans/START-HERE.md.
+const humans = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/humans' }),
+  schema: z.object({
+    name: z.string(),
+    alias: z.string().optional(),
+    avatar: z.string(),
+    avatarAlt: z.string(),
+    order: z.number().default(100),
+  }),
+});
+
+export const collections = { apps, games, humans };
