@@ -145,3 +145,22 @@ footer .site-bar { padding: 14px 0 40px; }
   .email-link { padding: 12px 20px; gap: 12px; }
   .socials-intro { margin-top: 36px; }
 }
+
+/* Meet the humans page (design: docs/art/humans/START-HERE.md) */
+.humans { padding-top: 64px; padding-bottom: 88px; }
+.humans h1 { font-size: clamp(3rem, 8vw, 5.6rem); margin: 0 0 48px; }
+.human { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.human + .human { margin-top: 72px; }
+.human-avatar { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border: 2.5px solid var(--lavender); border-radius: 16px; box-shadow: 0 0 22px rgb(201 184 255 / 0.18); }
+.human h2 { font-size: clamp(2rem, 4.4vw, 3.3rem); margin: 0; }
+.human-alias { margin: 6px 0 22px; color: var(--lavender); font-style: italic; font-size: clamp(1.4rem, 2.8vw, 2rem); line-height: 1.2; }
+.human-bio { max-width: 62ch; font-weight: 300; font-size: 1.15rem; }
+.human-bio p { margin: 0 0 18px; }
+.human-action { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; margin-top: 8px; color: var(--mint); font-weight: 500; font-size: 1.2rem; text-decoration: none; }
+.human-action:hover { color: var(--lavender); }
+@media (max-width: 760px) {
+  .humans { padding-top: 40px; }
+  .humans h1 { margin-bottom: 32px; }
+  .human { grid-template-columns: 1fr; gap: 28px; }
+  .human-avatar { max-width: 420px; }
+}
