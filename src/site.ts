@@ -7,8 +7,17 @@ export const site = {
 // Links with no destination yet render as dead (visible, not clickable). Set an href to bring one to life.
 export const links = {
   blog: 'https://substack.com/@ca7ichka', // Cat's Substack
-  connect: null as string | null, // its own connect page, not designed yet
+  connect: '/connect/' as string | null,
   humans: null as string | null, // its own "Meet the humans" page, not designed yet
+};
+
+export const contact = {
+  email: 'connect@catichkabeta.com',
+  socials: [
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/catherinecampbell-/', icon: 'linkedin' },
+    { label: 'Instagram', href: 'https://www.instagram.com/catichkasphilosophyforlife/', icon: 'instagram' },
+    { label: 'Twitter / X', href: 'https://x.com/catichka', icon: 'x' },
+  ],
 };
 
 export const nav = [
@@ -21,6 +30,7 @@ export const nav = [
 export const art = {
   druid: '/art/druid-small.png',
   heroTree: '/art/hero-tree.png',
+  connect: '/art/connect.png',
   apps: '/art/apps.png',
   games: '/art/games.png',
   blog: '/art/blog.png',

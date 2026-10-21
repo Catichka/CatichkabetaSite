@@ -12,6 +12,7 @@ interface Props {
 const { title, description = site.description } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
 const path = Astro.url.pathname;
+const current = (href: string | null) => (href && href.replace(/\/$/, '') === path.replace(/\/$/, '') ? 'page' : undefined);
 const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : undefined;
 ---
 <!doctype html>
@@ -48,7 +49,7 @@ const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : u
       <Brand />
       <nav class="nav" aria-label="Main">
         {nav.map((item) => (
-          <a href={item.href ?? undefined} aria-disabled={item.href ? undefined : 'true'}>{item.label}</a>
+          <a href={item.href ?? undefined} aria-disabled={item.href ? undefined : 'true'} aria-current={current(item.href)}>{item.label}</a>
         ))}
       </nav>
     </header>
@@ -61,7 +62,7 @@ const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : u
       <div class="site-bar">
         <Brand />
         <nav class="nav" aria-label="Footer">
-          {nav.map((item) => <a href={item.href ?? undefined} aria-disabled={item.href ? undefined : 'true'}>{item.label}</a>)}
+          {nav.map((item) => <a href={item.href ?? undefined} aria-disabled={item.href ? undefined : 'true'} aria-current={current(item.href)}>{item.label}</a>)}
         </nav>
       </div>
     </footer>

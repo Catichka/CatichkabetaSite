@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { art, contact } from '../site';
+---
+<Base title="Connect" description="Say hello to CatichkaBeta. Have an idea, a question, or something curious to share?">
+  <section class="connect wrap">
+    <div class="connect-copy">
+      <p class="eyebrow">Say hello</p>
+      <h1 class="lav">let’s connect</h1>
+      <p class="connect-lede">Have an idea, a question, or something curious to share? Say hello.</p>
+
+      <a class="email-link" href={`mailto:${contact.email}`}>
+        <svg class="email-icon" aria-hidden="true" viewBox="0 0 24 24" width="30" height="30"><rect x="2.5" y="5" width="19" height="14" rx="2" /><path d="M3 6.5l9 6.5 9-6.5" /></svg>
+        <span class="email-text">{contact.email}</span>
+        <span class="email-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <p class="socials-intro">You can also find me here</p>
+      <ul class="socials">
+        {contact.socials.map((s) => (
+          <li>
+            <a class={`social social-${s.icon}`} href={s.href} rel="noopener">
+              <span class="social-icon" aria-hidden="true">
+                {s.icon === 'linkedin' && (
+                  <svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 9.5v9M5 5.6v.4" /><path d="M10 18.5v-9M10 13.2c0-2.3 1.5-3.9 3.5-3.9s3.5 1.3 3.5 4v5.2" /></svg>
+                )}
+                {s.icon === 'instagram' && (
+                  <svg viewBox="0 0 24 24" width="22" height="22"><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4" /><path d="M17 7v.01" /></svg>
+                )}
+                {s.icon === 'x' && (
+                  <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4.5 4h4.2l10.8 16h-4.2z" /><path d="M19.3 4l-6.2 7M4.7 20l6.2-7" /></svg>
+                )}
+              </span>
+              <span>{s.label}</span>
+              <span class="social-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <img class="connect-art" src={art.connect} alt="" width="602" height="539" />
+  </section>
+</Base>
