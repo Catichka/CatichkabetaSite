@@ -12,5 +12,5 @@ const label = comingSoon ? 'COMING SOON' : featured ? 'FEATURED' : null;
     {url ? <a href={url} tabindex="-1">{title}</a> : title}
     {description && <span class="project-desc">{description}</span>}
   </span>
-  <a class="project-action" href={url} aria-disabled={url ? undefined : 'true'}>{action}<span class="sr-only">: {title}</span> <span aria-hidden="true">→</span></a>
+  {url && <a class="project-action" href={url}>{action}<span class="sr-only">: {title}</span> <span aria-hidden="true">→</span></a>}
 </li>
