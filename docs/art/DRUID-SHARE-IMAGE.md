@@ -1,19 +1,9 @@
-# Druid social sharing image
+# Druid share image — corrected direction
 
-Asset: `public/art/catichkabeta-share-druid-v1.png`
+Catherine requested just the druid, no words. This version replaces the original wordmark/tagline card in this PR.
 
-Original image: 1730 × 909 px, opaque PNG (1,258,585 bytes), approximately 1.91:1 landscape. Artwork inspected: lavender approved druid silhouette, CatichkaBeta wordmark and mint `imagination meets tools` headline, near-black background. Created with the built-in image-generation tool from the approved druid reference.
+Asset: `public/art/catichkabeta-share-druid-v1.png`. Opaque PNG, 1730 × 909 px (1,158,464 bytes). Lavender outline druid centered on near-black with generous space; no text or other decoration. Generated with the built-in image tool from the approved logo reference and visually inspected.
 
-## Claude integration
+Claude: use for the default Open Graph and Twitter/X large-card image, via an absolute URL on the verified deployment origin. Alt text: `CatichkaBeta's lavender outline druid on a near-black background.` Dimensions: 1730 × 909; type: image/png. For delivery, resize proportionally to a 1200 × 630 canvas and optimize the file, preserving the full silhouette and margins. Verify a real deployed link preview. This PR changes artwork and notes only.
 
-Use as the default site-wide Open Graph and large Twitter/X card image. Set `og:image` and `twitter:image` to an absolute public URL on the verified deployment origin, pointing to `/art/catichkabeta-share-druid-v1.png`. Use `summary_large_image`; image width 1730, height 909, MIME `image/png`.
-
-Suggested image alt: `CatichkaBeta's lavender outline druid above the words CatichkaBeta and imagination meets tools on a near-black background.`
-
-If a destination requires 1200 × 630, export a proportionate resized copy, preserving the whole composition and safe margins. Do not stretch or redraw the character. Confirm the deployed image URL is publicly accessible, and inspect a real link preview after integration. This PR supplies artwork and notes only; metadata wiring and deployment remain with Claude.
-
-## Generation brief
-
-Playful soft-cyberpunk illustration, clean shapes, pastel neon glow (lavender, mint, peach, baby blue, pink) on a near-black background, subtle grid and wireframe details, friendly and a little nerdy, not gritty, no text unless asked.
-
-Compose a landscape social sharing card from the approved druid reference. Preserve the druid's simple lavender monoline silhouette, empty face opening, raised drooping sleeves and rounded robe hem. One druid above the exact CatichkaBeta wordmark (white Catichka, lavender Beta), with the exact mint headline `imagination meets tools`. Near-black background, generous margins, restrained glow, no extra decoration or character details.
+Generation brief: Playful soft-cyberpunk illustration, clean shapes, pastel neon glow (lavender, mint, peach, baby blue, pink) on a near-black background, subtle grid and wireframe details, friendly and a little nerdy, not gritty, no text unless asked. Preserve the approved druid silhouette in simple lavender monoline: tall rounded hood, empty face opening, broad raised drooping sleeves, rounded robe hem. One centered druid only, generous margins, no text, no added details.
