@@ -40,7 +40,7 @@ const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : u
       <Brand />
       <nav class="nav" aria-label="Main">
         {nav.map((item) => (
-          <a href={item.href ?? undefined} aria-disabled={item.href ? undefined : 'true'} aria-current={item.href === '/blog/' && path.startsWith('/blog/') ? 'page' : undefined}>{item.label}</a>
+          <a href={item.href ?? undefined} aria-disabled={item.href ? undefined : 'true'}>{item.label}</a>
         ))}
       </nav>
     </header>

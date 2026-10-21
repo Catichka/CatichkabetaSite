@@ -1,7 +1,0 @@
----
-import { postTypes, type PostType } from '../site';
-
-interface Props { type: PostType }
-const { type } = Astro.props;
----
-<span class={`pill ${type}`}>{postTypes[type].single}</span>
