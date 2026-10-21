@@ -33,7 +33,6 @@ h1, h2, h3 { line-height: 1.05; letter-spacing: -0.02em; font-weight: 800; }
 /* Dead links: shown as designed but not clickable until they have a destination */
 a[aria-disabled='true'] { cursor: default; }
 .nav a[aria-disabled='true']:hover, .btn.ghost[aria-disabled='true']:hover { color: var(--text); box-shadow: none; }
-.project-action[aria-disabled='true']:hover { color: var(--lavender); }
 
 /* Header and footer share one bar */
 .site-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 14px; }

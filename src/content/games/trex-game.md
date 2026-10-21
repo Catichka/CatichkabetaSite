@@ -1,5 +1,5 @@
 ---
-title: The T-Rex Game
+title: T-Rex Run!
 url: https://trexgame.catichkabeta.com
 featured: true
 order: 1
