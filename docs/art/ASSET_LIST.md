@@ -19,6 +19,5 @@ The approved references are raster mock-ups, so Claude cut these out of them and
 | Priority | Asset | Why |
 | --- | --- | --- |
 | 1 | Apps, games and blog illustrations, isolated, transparent, about 1200px wide, same drawings | The cut-outs are under 450px wide, so they look soft on sharp phone and laptop screens |
-| 2 | Link preview image, 1200×630 PNG: druid and "CatichkaBeta" on near-black | Shown when the site is shared in chats and social posts |
-| 3 | The druid as a clean SVG or a 1024px transparent PNG | Crisper logo and favicon |
-| 4 | Hero woman and tree, isolated, transparent, about 1800px wide | Sharper hero on large screens |
+| 2 | The druid as a clean SVG or a 1024px transparent PNG | Crisper logo and favicon |
+| 3 | Hero woman and tree, isolated, transparent, about 1800px wide | Sharper hero on large screens |

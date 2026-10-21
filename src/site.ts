@@ -24,5 +24,6 @@ export const art = {
   apps: '/art/apps.png',
   games: '/art/games.png',
   blog: '/art/blog.png',
-  shareImage: null as string | null, // 1200x630 PNG link preview, still to come from ChatGPT
+  shareImage: '/art/share-druid.png' as string | null, // 1200x630 link preview (source: docs/art/source/)
+  shareImageAlt: "CatichkaBeta's lavender outline druid on a near-black background.",
 };

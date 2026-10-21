@@ -28,8 +28,16 @@ const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : u
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(path, Astro.site)} />
+    <meta property="og:site_name" content={site.name} />
     {shareImage && <meta property="og:image" content={shareImage} />}
+    {shareImage && <meta property="og:image:type" content="image/png" />}
+    {shareImage && <meta property="og:image:width" content="1200" />}
+    {shareImage && <meta property="og:image:height" content="630" />}
+    {shareImage && <meta property="og:image:alt" content={art.shareImageAlt} />}
     {shareImage && <meta name="twitter:card" content="summary_large_image" />}
+    {shareImage && <meta name="twitter:image" content={shareImage} />}
+    {shareImage && <meta name="twitter:image:alt" content={art.shareImageAlt} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
