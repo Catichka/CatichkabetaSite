@@ -1,6 +1,5 @@
 ---
 title: A Most Inconvenient Eternity
-comingSoon: true
+url: https://eternity.catichkabeta.com
 order: 2
-# url: add when the game is ready to share
 ---
