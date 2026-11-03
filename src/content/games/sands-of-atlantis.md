@@ -1,6 +1,6 @@
 ---
 title: Sands of Atlantis
-comingSoon: true
+url: https://sands.catichkabeta.com
+featured: true
 order: 3
-# url: add when the game is ready to share
 ---
