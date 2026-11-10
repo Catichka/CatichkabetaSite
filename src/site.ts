@@ -8,6 +8,7 @@ export const site = {
 export const links = {
   blog: 'https://substack.com/@ca7ichka', // Cat's Substack
   connect: '/connect/' as string | null,
+  catichka: 'https://catichka.com', // Catherine's professional site
   humans: '/humans/' as string | null,
 };
 
@@ -25,6 +26,7 @@ export const nav = [
   { href: '/#games', label: 'games' },
   { href: links.blog, label: 'blog' },
   { href: links.connect, label: 'connect' },
+  { href: links.catichka, label: 'catichka' },
 ];
 
 export const art = {
