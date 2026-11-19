@@ -10,6 +10,8 @@ const entry = z.object({
   comingSoon: z.boolean().default(false),
   availableNow: z.boolean().default(false),
   description: z.string().optional(),
+  image: z.string().optional(), // screenshot in public/art/, shown on the home page card
+  imageAlt: z.string().optional(),
   order: z.number().default(100),
 });
 const apps = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/apps' }), schema: entry });

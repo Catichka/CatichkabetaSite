@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+// A home page card: screenshot, badge, name, a short description and a link.
+interface Props { entry: CollectionEntry<'apps'> | CollectionEntry<'games'>; action: string; wide?: boolean }
+const { entry, action, wide } = Astro.props;
+const { title, url, featured, comingSoon, availableNow, description, image, imageAlt } = entry.data;
+const label = comingSoon ? 'COMING SOON' : availableNow ? 'AVAILABLE NOW' : featured ? 'FEATURED' : null;
+---
+<li class:list={['project-card', { wide }]}>
+  {image && (
+    <a class="project-shot" href={url} tabindex="-1" aria-hidden={url ? 'true' : undefined}>
+      <img src={image} alt={imageAlt ?? ''} width="960" height="540" loading="lazy" />
+    </a>
+  )}
+  <div class="project-body">
+    {label && <span class="badge"><span class="badge-dot"></span>{label}</span>}
+    <h3 class="project-title">{url ? <a href={url}>{title}</a> : title}</h3>
+    {description && <p class="project-blurb">{description}</p>}
+    {url && <a class="project-go" href={url}>{action}<span class="sr-only">: {title}</span> <span aria-hidden="true">→</span></a>}
+  </div>
+</li>
