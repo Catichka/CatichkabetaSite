@@ -1,6 +1,6 @@
 ---
 title: Family Outpost 31
-comingSoon: true
+url: https://outpost.catichkabeta.com
+availableNow: true
 order: 1
-# url: add when the app is ready to share
 ---

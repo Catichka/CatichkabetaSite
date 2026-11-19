@@ -8,6 +8,7 @@ const entry = z.object({
   url: z.string().url().optional(),
   featured: z.boolean().default(false),
   comingSoon: z.boolean().default(false),
+  availableNow: z.boolean().default(false),
   description: z.string().optional(),
   order: z.number().default(100),
 });
