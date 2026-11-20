@@ -34,6 +34,8 @@
   // The owner can switch counting off for one device by opening any page with ?cb_ignore=1 (and back on with =0).
   var flag = /[?&]cb_ignore=([01])/.exec(location.search);
   if (flag) store('cb_ignore', flag[1]);
+  // Local testing never counts.
+  if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) return;
   if (navigator.globalPrivacyControl || navigator.doNotTrack === '1') return;
   if (store('cb_ignore') === '1') return;
 
