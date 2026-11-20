@@ -7,9 +7,11 @@ import { site, nav, art } from '../site';
 interface Props {
   title?: string;
   description?: string;
+  /** Keep the page out of search engines and out of the visit counts (the private stats page). */
+  private?: boolean;
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, private: isPrivate = false } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
 const path = Astro.url.pathname;
 const current = (href: string | null) => (href && href.replace(/\/$/, '') === path.replace(/\/$/, '') ? 'page' : undefined);
@@ -23,6 +25,7 @@ const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : u
     <script is:inline>document.documentElement.classList.add('js');</script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {isPrivate && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/favicon-180.png" />
     <link rel="canonical" href={new URL(path, Astro.site)} />
@@ -42,6 +45,7 @@ const shareImage = art.shareImage ? new URL(art.shareImage, Astro.site).href : u
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+    {!isPrivate && <script is:inline src="/count.js" data-product="site" defer></script>}
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
