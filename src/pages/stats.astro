@@ -204,12 +204,14 @@ import Base from '../layouts/Base.astro';
     // Outpost: totals sent by its own server
     html += `<h2>${esc(OUTPOST.name)} <span class="stats-h-note"><a href="${OUTPOST.url}/operator/stats">full Outpost stats</a></span></h2>`;
     if (op) {
+      const r1 = (op.recent || []).find((r: any) => r.days === 1) || {};
       const r7 = (op.recent || []).find((r: any) => r.days === 7) || {};
       const r30 = (op.recent || []).find((r: any) => r.days === 30) || {};
       html += `<div class="stat-grid">`;
       html += tile('People signed up', op.people ?? 0);
       html += tile('Groups', op.groups ?? 0);
       html += tile('Signed in now', op.signed_in_now ?? 0, 'Within the last 12 hours');
+      html += tile('People who posted', r1.posters ?? 0, 'Last 24 hours');
       html += tile('People who posted', r7.posters ?? 0, 'Last 7 days');
       html += tile('People who posted', r30.posters ?? 0, 'Last 30 days');
       html += tile('Clicks from the website', clicks('outpost'), range);
